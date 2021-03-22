@@ -37,3 +37,13 @@ Route::post('admin/login',[App\Http\Controllers\Auth\LoginController::class, 'lo
 Route::post('admin/logout',[App\Http\Controllers\Auth\LoginController::class, 'logout']) ->name('admin.logout');
 // Registration korer jonno
 Route::post('admin/register',[App\Http\Controllers\Auth\RegisterController::class, 'register']) ->name('admin.register');
+
+/**
+ *  Post Route
+ */
+Route::resource('post','App\Http\Controllers\PostController');
+
+/**
+ *  Category Route
+ */
+Route::resource('category','App\Http\Controllers\CategoryController');

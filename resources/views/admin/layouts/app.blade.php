@@ -22,8 +22,10 @@
 
     <!-- Main CSS -->
     <link rel="stylesheet" href="{{ asset('admin/assets/css/style.css') }}">
+    {{--  sweetalert cdn --}}
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-<!--[if lt IE 9]>
+    <!--[if lt IE 9]>
 			<script src="{{ asset('admin/assets/js/html5shiv.min.js') }}"></script>
 			<script src="{{ asset('admin/assets/js/respond.min.js') }}"></script>
 		<![endif]-->
@@ -46,6 +48,8 @@
 <script src="{{ asset('admin/assets/plugins/raphael/raphael.min.js') }}"></script>
 <script src="{{ asset('admin/assets/plugins/morris/morris.min.js') }}"></script>
 <script src="{{ asset('admin/assets/js/chart.morris.js') }}"></script>
+
+
 
 <!-- Custom JS -->
 <script src="{{ asset('admin/assets/js/script.js') }}"></script>
