@@ -31,5 +31,7 @@ Route::get('admin/register',[App\Http\Controllers\AdminController::class, 'showA
 // admin dashboard route
 Route::get('admin/dashboard',[App\Http\Controllers\AdminController::class, 'showAdminDashboard']) ->name('admin.dashboard');
 
-// login korer jonno
+// Login korer jonno
 Route::post('admin/login',[App\Http\Controllers\Auth\LoginController::class, 'login']) ->name('admin.login');
+// Logout korer jonno
+Route::post('admin/logout',[App\Http\Controllers\Auth\LoginController::class, 'logout']) ->name('admin.logout');

@@ -49,6 +49,8 @@
 
 <!-- Custom JS -->
 <script src="{{ asset('admin/assets/js/script.js') }}"></script>
+{{--  admin custom js link   !--}}
+<script src="{{ asset('admin/assets/js/comet/custom.js') }}"></script>
 
 </body>
 
