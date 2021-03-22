@@ -20,3 +20,13 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+/*
+ * Admin Route
+ */
+// show admin login page route
+Route::get('admin/login',[App\Http\Controllers\AdminController::class, 'showAdminLoginForm']) ->name('admin.login');
+// show admin register page route
+Route::get('admin/register',[App\Http\Controllers\AdminController::class, 'showAdminRegisterForm']) ->name('admin.register');
+// admin dashboard route
+Route::get('admin/dashboard',[App\Http\Controllers\AdminController::class, 'showAdminDashboard']) ->name('admin.dashboard');
