@@ -35,3 +35,5 @@ Route::get('admin/dashboard',[App\Http\Controllers\AdminController::class, 'show
 Route::post('admin/login',[App\Http\Controllers\Auth\LoginController::class, 'login']) ->name('admin.login');
 // Logout korer jonno
 Route::post('admin/logout',[App\Http\Controllers\Auth\LoginController::class, 'logout']) ->name('admin.logout');
+// Registration korer jonno
+Route::post('admin/register',[App\Http\Controllers\Auth\RegisterController::class, 'register']) ->name('admin.register');
