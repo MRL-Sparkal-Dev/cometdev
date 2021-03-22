@@ -17,12 +17,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Auth::routes();
+//
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 /*
- * Admin Route
+ * Admin template Load
  */
 // show admin login page route
 Route::get('admin/login',[App\Http\Controllers\AdminController::class, 'showAdminLoginForm']) ->name('admin.login');
@@ -30,3 +30,6 @@ Route::get('admin/login',[App\Http\Controllers\AdminController::class, 'showAdmi
 Route::get('admin/register',[App\Http\Controllers\AdminController::class, 'showAdminRegisterForm']) ->name('admin.register');
 // admin dashboard route
 Route::get('admin/dashboard',[App\Http\Controllers\AdminController::class, 'showAdminDashboard']) ->name('admin.dashboard');
+
+// login korer jonno
+Route::post('admin/login',[App\Http\Controllers\Auth\LoginController::class, 'login']) ->name('admin.login');
