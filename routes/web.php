@@ -38,12 +38,13 @@ Route::post('admin/logout',[App\Http\Controllers\Auth\LoginController::class, 'l
 // Registration korer jonno
 Route::post('admin/register',[App\Http\Controllers\Auth\RegisterController::class, 'register']) ->name('admin.register');
 
-/**
- *  Post Route
- */
+// post route
 Route::resource('post','App\Http\Controllers\PostController');
 
-/**
- *  Category Route
- */
+//Category Route
 Route::resource('category','App\Http\Controllers\CategoryController');
+
+//status inactive route
+Route::get('category/status-inactive/{id}','App\Http\Controllers\CategoryController@statusUpdateInactive');
+//status inactive route
+Route::get('category/status-active/{id}','App\Http\Controllers\CategoryController@statusUpdateActive');
