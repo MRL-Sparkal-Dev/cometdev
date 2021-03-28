@@ -42,6 +42,23 @@
             }
         });
 
+        // Category Edit
+        $(document).on('click','.edit_cat', function (e) {
+            e.preventDefault();
+            // get id
+            let id= $(this).attr('edit_id');
+            //send ajax request
+            $.ajax({
+                url : 'category/' +id+ '/edit',
+                success: function (data) {
+                    $('#update_category_modal form input[name="name"]'). val(data.name);
+                    $('#update_category_modal form input[name="edit_id"]'). val(data.id);
+                }
+            });
+            // for modal show
+            $('#update_category_modal').modal('show');
+        });
+
 
     });
 })(jQuery)

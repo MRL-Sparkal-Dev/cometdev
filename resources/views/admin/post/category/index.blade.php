@@ -57,14 +57,14 @@
                                                     <td>{{ date('F d, Y', strtotime($data -> created_at)) }}</td>
                                                     <td>
                                                         <div class="status-toggle">
-                                                            <input  type="checkbox" status_id="{{ $data -> id }}"  {{ ( $data -> status == true ? 'checked="checked"' : '' ) }} id="cat_status_{{ $loop -> index + 1 }}" class="check cat_check" >
+                                                            <input type="checkbox" status_id="{{ $data -> id }}"  {{ ( $data -> status == true ? 'checked="checked"' : '' ) }} id="cat_status_{{ $loop -> index + 1 }}" class="check cat_check" >
                                                             <label for="cat_status_{{ $loop -> index + 1 }}" class="checktoggle">checkbox</label>
                                                         </div>
                                                     </td>
                                                     <td>
 {{--                                                        <a class="btn btn-sm btn-info" href="#"><i class="fa fa-eye-slash" aria-hidden="true"></i>--}}
 {{--                                                        </a>--}}
-                                                        <a class="btn btn-sm btn-warning" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                                        <a  edit_id="{{ $data -> id }}" class=" edit_cat btn btn-sm btn-warning" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                                                         <form class="d-inline" action="{{ route('category.destroy', $data -> id) }}" method="POST">
                                                             @csrf
                                                             @method('DELETE')
@@ -99,6 +99,30 @@
                         <div class="form-group">
                             <label for="">Name</label>
                             <input name="name" type="text" class="form-control" placeholder="category-name">
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-sm btn-primary">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{{--    edit-category--}}
+    <div id="update_category_modal" class="modal fade">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h2>Update Category</h2>
+                    <hr>
+                    <form action="{{ route('category.update', $data -> id ) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <div class="form-group">
+                            <label for="">Name</label>
+                            <input name="name" type="text" class="form-control" placeholder="category-name">
+                            <input name="edit_id" type="hidden" class="form-control" placeholder="edit_id">
                         </div>
                         <div class="form-group">
                             <input type="submit" class="btn btn-sm btn-primary">
