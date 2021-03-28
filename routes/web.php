@@ -41,10 +41,16 @@ Route::post('admin/register',[App\Http\Controllers\Auth\RegisterController::clas
 // post route
 Route::resource('post','App\Http\Controllers\PostController');
 
-//Category Route
+// Post Category Route
 Route::resource('category','App\Http\Controllers\CategoryController');
-
-//status inactive route
+// Post Category Status inactive route
 Route::get('category/status-inactive/{id}','App\Http\Controllers\CategoryController@statusUpdateInactive');
-//status inactive route
+// Post Category Status Active route
 Route::get('category/status-active/{id}','App\Http\Controllers\CategoryController@statusUpdateActive');
+
+// Post Tag routes
+Route::resource('tag','App\Http\Controllers\TagController');
+// Post Tag Status inactive route
+Route::get('tag/status-inactive/{id}','App\Http\Controllers\TagController@statusUpdateInactive');
+// Post Tag Status Active route
+Route::get('tag/status-active/{id}','App\Http\Controllers\TagController@statusUpdateActive');
