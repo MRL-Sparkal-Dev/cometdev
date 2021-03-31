@@ -64,7 +64,7 @@
                                                     <td>
 {{--                                                        <a class="btn btn-sm btn-info" href="#"><i class="fa fa-eye-slash" aria-hidden="true"></i>--}}
 {{--                                                        </a>--}}
-                                                        <a  edit_id="{{ $data -> id }}" class="edit_tag btn btn-sm btn-warning" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                                        <a  edit_id="{{ $data -> id }}" class=" edit_tag btn btn-sm btn-warning" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                                                         <form class="d-inline" action="{{ route('tag.destroy', $data -> id) }}" method="POST">
                                                             @csrf
                                                             @method('DELETE')
@@ -92,7 +92,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body">
-                    <h2>Add New Tag</h2>
+                    <h2>Add New tag</h2>
                     <hr>
                     <form action="{{ route('tag.store') }}" method="POST">
                         @csrf

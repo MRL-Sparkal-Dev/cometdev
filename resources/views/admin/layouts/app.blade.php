@@ -19,7 +19,8 @@
     <!-- Feathericon CSS -->
     <link rel="stylesheet" href="{{ asset('admin/assets/css/feathericon.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/assets/plugins/morris/morris.css') }}">
-
+    <!-- select2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <!-- Main CSS -->
     <link rel="stylesheet" href="{{ asset('admin/assets/css/style.css') }}">
     {{--  sweetalert cdn --}}
@@ -49,6 +50,10 @@
 <script src="{{ asset('admin/assets/plugins/morris/morris.min.js') }}"></script>
 <script src="{{ asset('admin/assets/js/chart.morris.js') }}"></script>
 
+<!-- select2 JS -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<!-- ckeditor JS -->
+<script src="//cdn.ckeditor.com/4.16.0/full/ckeditor.js"></script>
 
 
 <!-- Custom JS -->

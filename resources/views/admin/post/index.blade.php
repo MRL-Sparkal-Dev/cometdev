@@ -19,7 +19,7 @@
                         <div class="col-sm-12">
                             <h3 class="page-title">Welcome {{ Auth::user() -> name }}!</h3>
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item active">Dashboard</li>
+                                <li class="breadcrumb-item active">Post</li>
                             </ul>
                         </div>
                     </div>
@@ -28,7 +28,8 @@
 
                 <div class="row">
                     <div class="col-lg-12">
-                        <a class="btn btn-sm btn-primary" href="#">Add New Post</a>
+                        <a class="btn btn-sm btn-primary" href="{{ route('post.create') }}">Add New Post</a>
+                        @include('validate')
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">All Posts</h4>
@@ -41,24 +42,46 @@
                                             <th>#</th>
                                             <th>Post Title</th>
                                             <th>Post Category</th>
-                                            <th>Tag</th>
-                                            <th>Date</th>
+                                            <th>Post Tag</th>
+                                            <th>Post Type</th>
+                                            <th>Published</th>
+                                            <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Doe</td>
-                                            <td>john@example.com</td>
-                                            <td>john@example.com</td>
-                                            <td>john@example.com</td>
-                                            <td>
-                                                <a class="btn btn-sm btn-info" href="#">View</a>
-                                                <a class="btn btn-sm btn-warning" href="#">Edit</a>
-                                                <a class="btn btn-sm btn-danger" href="#">Delete</a>
-                                            </td>
-                                        </tr>
+                                            @foreach($all_data as $data)
+
+                                                @php
+                                                    $featured_data = json_decode( $data -> featured );
+                                                @endphp
+
+                                                <tr>
+                                                    <td>{{ $loop-> index+1 }}</td>
+                                                    <td>{{ $data -> title }}</td>
+                                                    <td>{{ $data -> category }}</td>
+                                                    <td>{{ $data -> tag }}</td>
+                                                    <td>{{ $featured_data -> post_type }}</td>
+{{--                                                    <td>{{ $data -> created_at -> diffForhumans() }}</td>--}}
+                                                    <td>{{ date('F d, Y', strtotime($data -> created_at)) }}</td>
+                                                    <td>
+                                                        <div class="status-toggle">
+                                                            <input type="checkbox" status_id="{{ $data -> id }}"  {{ ( $data -> status == true ? 'checked="checked"' : '' ) }} id="cat_status_{{ $loop -> index + 1 }}" class="check cat_check" >
+                                                            <label for="cat_status_{{ $loop -> index + 1 }}" class="checktoggle">checkbox</label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+{{--                                                        <a class="btn btn-sm btn-info" href="#"><i class="fa fa-eye-slash" aria-hidden="true"></i>--}}
+{{--                                                        </a>--}}
+                                                        <a  edit_id="{{ $data -> id }}" class="edit_tag btn btn-sm btn-warning" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                                        <form class="d-inline" action="{{ route('tag.destroy', $data -> id) }}" method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button class="btn btn-danger btn-sm delete-btn"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -73,4 +96,50 @@
 
     </div>
     <!-- /Main Wrapper -->
+
+    <div id="add_tag_modal" class="modal fade">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h2>Add New Tag</h2>
+                    <hr>
+                    <form action="{{ route('tag.store') }}" method="POST">
+                        @csrf
+                        <div class="form-group">
+                            <label for="">Name</label>
+                            <input name="name" type="text" class="form-control" placeholder="tag-name">
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-sm btn-primary">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{{--    edit-tag--}}
+    <div id="update_tag_modal" class="modal fade">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h2>Update tag</h2>
+                    <hr>
+                    <form action="{{ route('tag.update', $data -> id ) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <div class="form-group">
+                            <label for="">Name</label>
+                            <input name="name" type="text" class="form-control" placeholder="tag-name">
+                            <input name="edit_id" type="hidden" class="form-control" placeholder="edit_id">
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-sm btn-primary">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
