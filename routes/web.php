@@ -45,6 +45,10 @@ Route::post('admin/register',[App\Http\Controllers\Auth\RegisterController::clas
 
 // post route
 Route::resource('post','App\Http\Controllers\PostController');
+//post trash
+Route::get('post-trash','App\Http\Controllers\PostController@postTrashShow')-> name('post.trash');
+// post trash update
+Route::get('post-trash-update/{id}','App\Http\Controllers\PostController@postTrashUpdate')-> name('post.trash.update');
 
 // Post Category Route
 Route::resource('category','App\Http\Controllers\CategoryController');

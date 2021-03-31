@@ -17,11 +17,57 @@ class PostController extends Controller
      */
     public function index()
     {
-        $data = Post::all();
+        $data = Post::where('trash',false) -> get();
+        $published = Post::where('trash',false) -> get() ->count();
+        $trash = Post::where('trash',true) -> get() ->count();
 
         return view('admin.post.index',[
-            'all_data' => $data,
+            'all_data'  => $data,
+            'published' => $published,
+            'trash'     => $trash
         ]);
+    }
+
+    /**
+     * Post Trash Show
+     */
+    public function postTrashShow()
+    {
+        $data = Post::where( 'trash', true ) -> get();
+        $published = Post::where('trash',false) -> get() ->count();
+        $trash = Post::where('trash',true) -> get() ->count();
+
+        return view('admin.post.trash',[
+            'all_data' => $data,
+            'published' => $published,
+            'trash'     => $trash
+        ]);
+    }
+
+    /**
+     * Post Trash update
+     */
+    public function postTrashUpdate($id)
+    {
+
+        $trash_data = Post::find($id);
+
+        if( $trash_data -> trash == false ){
+
+            $trash_data -> trash = true;
+
+        }else{
+
+            $trash_data -> trash = false;
+
+        }
+
+        $trash_data -> update();
+
+        // return back();
+
+        return redirect() -> back() -> with('success', 'Data Move Trash successful');
+
     }
 
     /**
@@ -136,6 +182,8 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete_data = Post::find($id);
+        $delete_data -> delete();
+        return redirect() -> route('post.trash') -> with('success', 'Data delete permanently');
     }
 }

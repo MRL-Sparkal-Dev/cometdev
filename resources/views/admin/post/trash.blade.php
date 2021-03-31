@@ -32,9 +32,9 @@
                         @include('validate')
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">All Posts</h4>
+                                <h4 class="card-title">All Posts (Trash)</h4>
                                 <br>
-                                <a class="badge badge-primary" href="{{ route('post.index') }}">Published{{ ($published == 0 ? '' : $published ) }}</a>
+                                <a class="badge badge-primary" href="{{ route('post.index') }}">Published {{ ($published == 0 ? '' : $published ) }}</a>
                                 <a class="badge badge-danger" href="{{ route('post.trash') }}">Trash {{ ( $trash == 0 ? '' : $trash ) }}</a>
                                 <br><br>
                             </div>
@@ -45,11 +45,7 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Post Title</th>
-                                            <th>Post Category</th>
-                                            <th>Post Tag</th>
                                             <th>Post Type</th>
-                                            <th>Published</th>
-                                            <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                         </thead>
@@ -63,22 +59,18 @@
                                                 <tr>
                                                     <td>{{ $loop-> index+1 }}</td>
                                                     <td>{{ $data -> title }}</td>
-                                                    <td>{{ $data -> category }}</td>
-                                                    <td>{{ $data -> tag }}</td>
                                                     <td>{{ $featured_data -> post_type }}</td>
-{{--                                                    <td>{{ $data -> created_at -> diffForhumans() }}</td>--}}
-                                                    <td>{{ date('F d, Y', strtotime($data -> created_at)) }}</td>
                                                     <td>
-                                                        <div class="status-toggle">
-                                                            <input type="checkbox" status_id="{{ $data -> id }}"  {{ ( $data -> status == true ? 'checked="checked"' : '' ) }} id="cat_status_{{ $loop -> index + 1 }}" class="check cat_check" >
-                                                            <label for="cat_status_{{ $loop -> index + 1 }}" class="checktoggle">checkbox</label>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-{{--                                                        <a class="btn btn-sm btn-info" href="#"><i class="fa fa-eye-slash" aria-hidden="true"></i>--}}
-{{--                                                        </a>--}}
-                                                        <a  edit_id="{{ $data -> id }}" class="edit_tag btn btn-sm btn-warning" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                                        <a class="btn btn-sm btn-danger" href="{{ route('post.trash.update', $data -> id ) }}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                                        <a class="btn btn-sm btn-primary" href="{{ route('post.trash.update', $data -> id) }}">Data Recover</a>
+
+                                                        <form style=" display: inline;"action="{{ route('post.destroy',$data -> id) }}" method="POST">
+
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button class="btn btn-sm btn-danger"> Delete Permanently </button>
+
+                                                        </form>
+
                                                     </td>
                                                 </tr>
                                             @endforeach
