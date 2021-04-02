@@ -122,11 +122,19 @@ class PostController extends Controller
 
         }
 
-         $post_featured =[
+        $check_link = '';
+        if(!empty(strpos($request->video, 'youtube.com'))) {
+            $check_link = str_replace('watch?v=','embed/', $request -> video);
+        } else if(!empty(strpos($request->video, 'vimeo.com'))) {
+            $check_link = str_replace('vimeo.com/','player.vimeo.com/video/', $request -> video);
+        }
+        
+
+        $post_featured =[
             'post_type'    => $request -> post_type,
             'image'        => $unique_file_name,
             'post_gallery' => $gallery_images,
-            'post_vedio'   => $request -> video,
+            'post_video'   => $check_link,
             'post_audio'   => $request -> audio
         ];
 

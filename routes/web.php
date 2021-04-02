@@ -63,3 +63,10 @@ Route::resource('tag','App\Http\Controllers\TagController');
 Route::get('tag/status-inactive/{id}','App\Http\Controllers\TagController@statusUpdateInactive');
 // Post Tag Status Active route
 Route::get('tag/status-active/{id}','App\Http\Controllers\TagController@statusUpdateActive');
+
+
+/**
+ *  Frontend all Route
+ */
+
+Route::get('blog','App\Http\Controllers\BlogPageController@showBlogPage') -> name('blog.show');

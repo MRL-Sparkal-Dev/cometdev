@@ -66,7 +66,6 @@
                                                     <td>{{ $data -> category }}</td>
                                                     <td>{{ $data -> tag }}</td>
                                                     <td>{{ $featured_data -> post_type }}</td>
-{{--                                                    <td>{{ $data -> created_at -> diffForhumans() }}</td>--}}
                                                     <td>{{ date('F d, Y', strtotime($data -> created_at)) }}</td>
                                                     <td>
                                                         <div class="status-toggle">
@@ -96,50 +95,5 @@
 
     </div>
     <!-- /Main Wrapper -->
-
-    <div id="add_tag_modal" class="modal fade">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <h2>Add New Tag</h2>
-                    <hr>
-                    <form action="{{ route('tag.store') }}" method="POST">
-                        @csrf
-                        <div class="form-group">
-                            <label for="">Name</label>
-                            <input name="name" type="text" class="form-control" placeholder="tag-name">
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" class="btn btn-sm btn-primary">
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-{{--    edit-tag--}}
-    <div id="update_tag_modal" class="modal fade">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <h2>Update tag</h2>
-                    <hr>
-                    <form action="{{ route('tag.update', $data -> id ) }}" method="POST">
-                        @csrf
-                        @method('PUT')
-                        <div class="form-group">
-                            <label for="">Name</label>
-                            <input name="name" type="text" class="form-control" placeholder="tag-name">
-                            <input name="edit_id" type="hidden" class="form-control" placeholder="edit_id">
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" class="btn btn-sm btn-primary">
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 
 @endsection
