@@ -12,7 +12,7 @@ class BlogPageController extends Controller
     */
     public function showBlogPage()
     {
-        $all_posts = Post::where( 'status', true ) -> latest() -> paginate(4);
+        $all_posts = Post::where( 'status', true ) -> where('trash', false) -> latest() -> paginate(4);
        return view('comet.blog', compact('all_posts') );
 
     }

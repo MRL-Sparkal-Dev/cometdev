@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Tag;
 use App\Models\Post;
 use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
@@ -17,7 +18,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $data = Post::where('trash',false) -> get();
+        $data = Post::where('trash',false) -> latest() -> get();
         $published = Post::where('trash',false) -> get() ->count();
         $trash = Post::where('trash',true) -> get() ->count();
 
@@ -123,12 +124,12 @@ class PostController extends Controller
         }
 
         $check_link = '';
-        if(!empty(strpos($request->video, 'youtube.com'))) {
+        if( !empty(strpos($request->video, 'youtube.com') )) {
             $check_link = str_replace('watch?v=','embed/', $request -> video);
-        } else if(!empty(strpos($request->video, 'vimeo.com'))) {
+        } else if( !empty(strpos($request->video, 'vimeo.com') )) {
             $check_link = str_replace('vimeo.com/','player.vimeo.com/video/', $request -> video);
         }
-        
+
 
         $post_featured =[
             'post_type'    => $request -> post_type,
@@ -138,12 +139,16 @@ class PostController extends Controller
             'post_audio'   => $request -> audio
         ];
 
-        Post::create([
+        $post_data = Post::create([
             'title'     => $request -> title,
+            'user_id'     => Auth::user() -> id,
             'slug'      => Str::slug( $request -> title ),
             'featured'   => json_encode( $post_featured ),
             'content'   => $request -> content
         ]);
+
+        $post_data -> categories() -> attach( $request -> cat );
+        $post_data -> tags() -> attach( $request -> tag );
 
         return redirect() -> route('post.index') -> with('success', 'Post Added Successfully');
     }

@@ -45,6 +45,7 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Post Title</th>
+                                            <th>Author</th>
                                             <th>Post Category</th>
                                             <th>Post Tag</th>
                                             <th>Post Type</th>
@@ -63,8 +64,17 @@
                                                 <tr>
                                                     <td>{{ $loop-> index+1 }}</td>
                                                     <td>{{ $data -> title }}</td>
-                                                    <td>{{ $data -> category }}</td>
-                                                    <td>{{ $data -> tag }}</td>
+                                                    <td>{{ $data -> user -> name }}</td>
+                                                    <td>
+                                                        @foreach($data -> categories as $cat)
+                                                            <li>{{ $cat -> name }}</li>
+                                                        @endforeach
+                                                    </td>
+                                                    <td>
+                                                        @foreach($data -> tags as $tag)
+                                                            <li>{{ $tag -> name }}</li>
+                                                        @endforeach
+                                                    </td>
                                                     <td>{{ $featured_data -> post_type }}</td>
                                                     <td>{{ date('F d, Y', strtotime($data -> created_at)) }}</td>
                                                     <td>
