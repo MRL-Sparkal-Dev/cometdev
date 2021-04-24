@@ -15,7 +15,7 @@
 
                 <article class="post-single">
                     <div class="post-info">
-                        <h2><a href="#">{{ $post -> title }}</a></h2>
+                        <h2><a href="{{ route('post.single',$post -> slug) }}">{{ $post -> title }}</a></h2>
                         <h6 class="upper"><span>By</span><a href=""> {{ $post -> user -> name }}</a><span class="dot"></span><span>{{ date('d F Y', strtotime($post -> created_at)) }}</span><span class="dot"></span><a href="#" class="post-tag">Startups</a></h6>
                     </div>
 
@@ -59,7 +59,7 @@
 
                     <div class="post-body">
                         {!! Str::of(htmlspecialchars_decode($post -> content)) -> words(30) !!}
-                        <p><a href="{{ route('post.single', $post -> slug) }}" class="btn btn-color btn-sm">Read More</a></p>
+                        <p><a href="{{ route('post.single',$post -> slug) }}" class="btn btn-color btn-sm">Read More</a></p>
                     </div>
                 </article>
              @endforeach

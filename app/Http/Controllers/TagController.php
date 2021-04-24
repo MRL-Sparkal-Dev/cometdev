@@ -45,7 +45,7 @@ class TagController extends Controller
 
         Tag::create([
             'name' => $request -> name,
-            'slug' => Str::slug($request -> name),
+            'slug' => $this -> getSlug($request -> name),
         ]);
 
         return redirect() -> route('tag.index') -> with('success', 'Category Added Successful');
@@ -90,7 +90,7 @@ class TagController extends Controller
         $edit_id = $request -> edit_id;
         $edit_data = Tag::find($edit_id);
         $edit_data -> name = $request -> name;
-        $edit_data -> slug = Str::slug($request -> name);
+        $edit_data -> slug = $this -> getSlug($request -> name);
         $edit_data -> update();
 
         return redirect() -> route('tag.index') -> with('success', 'Tag Updated Successfully');

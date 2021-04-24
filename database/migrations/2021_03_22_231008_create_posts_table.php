@@ -21,6 +21,7 @@ class CreatePostsTable extends Migration
             $table->longText('featured') -> nullable();
             $table->longText('content');
             $table->boolean('trash') ->default(false);
+            $table->unsignedInteger('views') ->default(0);
             $table->boolean('status') ->default(true);
             $table->timestamps();
         });

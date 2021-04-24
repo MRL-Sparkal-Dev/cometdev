@@ -70,3 +70,9 @@ Route::get('tag/status-active/{id}','App\Http\Controllers\TagController@statusUp
  */
 
 Route::get('blog','App\Http\Controllers\BlogPageController@showBlogPage') -> name('blog.show');
+// Blog Search
+Route::post('blog','App\Http\Controllers\BlogPageController@blogSearch')->name('post.search');
+// Blog Search Category
+Route::get('blog/category/{slug}','App\Http\Controllers\BlogPageController@blogSearchByCat')->name('post.category.search');
+// Blog Single page
+Route::get('blog/{slug}','App\Http\Controllers\BlogPageController@blogSingle')->name('post.single');

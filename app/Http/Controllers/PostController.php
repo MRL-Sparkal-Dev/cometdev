@@ -123,26 +123,27 @@ class PostController extends Controller
 
         }
 
-        $check_link = '';
-        if( !empty(strpos($request->video, 'youtube.com') )) {
-            $check_link = str_replace('watch?v=','embed/', $request -> video);
-        } else if( !empty(strpos($request->video, 'vimeo.com') )) {
-            $check_link = str_replace('vimeo.com/','player.vimeo.com/video/', $request -> video);
-        }
+        // $check_link = '';
+        // if( !empty(strpos($request->video, 'youtube.com') )) {
+        //     $check_link = str_replace('watch?v=','embed/', $request -> video);
+        // } else if( !empty(strpos($request->video, 'vimeo.com') )) {
+        //     $check_link = str_replace('vimeo.com/','player.vimeo.com/video/', $request -> video);
+        // }
+
 
 
         $post_featured =[
             'post_type'    => $request -> post_type,
             'image'        => $unique_file_name,
             'post_gallery' => $gallery_images,
-            'post_video'   => $check_link,
+            'post_video'   => $this -> getEmbed( $request -> video ),
             'post_audio'   => $request -> audio
         ];
 
         $post_data = Post::create([
             'title'     => $request -> title,
             'user_id'     => Auth::user() -> id,
-            'slug'      => Str::slug( $request -> title ),
+            'slug'      => $this -> getSlug( $request -> title ),
             'featured'   => json_encode( $post_featured ),
             'content'   => $request -> content
         ]);
