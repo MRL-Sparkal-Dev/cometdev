@@ -61,7 +61,6 @@
                     <a href="profile.html"><i class="fe fe-user-plus"></i> <span>Settings</span></a>
                 </li>
 
-                {{ Route::currentRouteName() }}
 
             </ul>
         </div>
